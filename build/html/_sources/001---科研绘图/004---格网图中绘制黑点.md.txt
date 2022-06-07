@@ -1,0 +1,65 @@
+# 格网图中绘制黑点
+
+```{tip}
+使用此功能需要安装Climate Data Toolbox
+```
+
+## 1.二维
+
+1.绘制格网图(pcolor)
+
+```matlab
+[X,Y,Z] = peaks(1000);
+pcolor(X,Y,Z)
+shading interp
+hold on
+```
+
+2.生成掩膜
+
+```matlab
+mask = Z>2.5;
+```
+
+3.绘制黑点
+
+`color`属性控制点的颜色，默认为黑色；`density`属性控制点的密度，默认为100；`marker`属性控制点的符号，默认为点；`markersize`属性控制点的大小，默认为6。
+
+```matlab
+stipple(X,Y,mask,'color',[0,0,0],'density',100,'marker','.','markersize',10);
+```
+
+<img src="..\_static\f001.png" alt="001" style="zoom:12%;" />
+
+---
+
+## 2.三维
+
+1.绘制三维图(surf)
+
+```matlab
+[X,Y,Z] = peaks(1000);
+surf(X,Y,Z)
+shading interp
+hold on
+```
+
+2.绘制黑点
+
+```matlab
+h=stipple(X,Y,mask,'color',[0,0,0],'density',100,'marker','.','markersize',6);
+```
+
+3.改变句柄h的数据
+
+```matlab
+x=X(mask);
+y=Y(mask);
+z=Z(mask);
+h.XData=x(1:500:end);
+h.YData=y(1:500:end);
+h.ZData=z(1:500:end);
+```
+
+<img src="..\_static\f002.png" alt="001" style="zoom:12%;" />
+

@@ -1,0 +1,83 @@
+# 爬取数据
+
+现在网上的爬虫程序很多，但大多不实用！今天，我们以爬取论文数据为例了解Matlab爬虫！
+
+首先，明确我们要爬取什么数据！如下图，第一张图片表示年积日，第二张图片表示第一天里有哪些数据，我们打算爬取一年的ionPrf数据！
+
+<img src="..\_static\i1.png" alt="1" style="zoom:40%;" />
+
+<img src="..\_static\i2.png" alt="2" style="zoom:40%;" />
+
+
+
+1.首先构造网址，分别是：
+
+'https://data.cosmic.ucar.edu/gnss-ro/cosmic1/postProc/level2/2016/001/'
+
+...
+
+'https://data.cosmic.ucar.edu/gnss-ro/cosmic1/postProc/level2/2016/365/'
+
+```matlab
+the_url='https://data.cosmic.ucar.edu/gnss-ro/cosmic1/postProc/level2/2016/';
+for i=1:365
+    doy=sprintf('%03d',i);
+    url=[the_url,doy,'/'];
+end
+```
+
+2.读取页面源代码
+
+```matlab
+contents=webread(url);
+```
+
+<img src="..\_static\i3.png" alt="2" style="zoom:40%;" />
+
+3.解析页面源代码
+
+```matlab
+hT=htmlTree(contents);
+```
+
+<img src="..\_static\i4.png" alt="2" style="zoom:40%;" />
+
+4.从hT中寻找`<A href="...">...</A>`
+
+```matlab
+A_label=findElement(hT,'a');
+```
+
+<img src="..\_static\i5.png" alt="2" style="zoom:40%;" />
+
+
+
+5.获取链接
+
+```matlab
+url_download=getAttribute(A_label,'href');
+```
+
+<img src="..\_static\i6.png" alt="2" style="zoom:40%;" />
+
+6.找到`ionPrf`文件在数组里的位置，然后提取出来
+
+```
+flag=cellfun(@isempty,regexp(url_download,'ionPrf'));
+url_download=url_download(~flag);
+```
+
+7.组合网页链接
+
+```
+url_download=url+url_download;
+```
+
+结果示例：https://data.cosmic.ucar.edu/gnss-ro/cosmic1/postProc/level2/2016/001/ionPrf_postProc_2016_001.tar.gz
+
+8.下载数据
+
+```
+% filename自己设置,这里不展开
+websave(filename,url_download);
+```

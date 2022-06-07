@@ -1,0 +1,63 @@
+# 设置色标样式
+
+众所周知，用`Matlab`的`colormap`画图比较丑，不少仁人志士开发了工具箱。例如：[Custom Colormap](https://ww2.mathworks.cn/matlabcentral/fileexchange/69470-custom-colormap?s_tid=srchtitle_customcolormap_1)。
+
+我在其`customcolormap`的基础上做了一款GUI，如下图。
+
+<img src="..\_static\b003.png" alt="003" style="zoom:46%;" />
+
+点击`Copy`，就可以得到`colormap`颜色数据的相应代码，然后添加到脚本中就可以了！就是这么Easy!
+
+下面是一些示例图，这些`colormap`是我精挑细选的，我在论文中常看到！
+
+<img src="..\_static\b002.png" alt="002" style="zoom:12%;" />
+
+{download}`GIM_TEC爬虫程序<../_static/get_colormap.zip>`
+
+---
+
+这里详细说一下使用方法！
+
+1.画图
+
+```matlab
+figure;
+pcolor(peaks(50));
+shading interp
+colorbar;
+```
+
+<img src="..\_static\b004.png" alt="004" style="zoom:10%;" />
+
+2.打开GUI，选择心仪的`colormap`后点击`copy`
+
+<img src="..\_static\b003.png" alt="003" style="zoom:46%;" />
+
+3.粘贴代码至脚本，并设置colormap
+
+```matlab
+% 第一行代码是粘贴过来的
+mycolormap = customcolormap(linspace(0,1,8),mycolor(1,1));
+colormap(mycolormap)
+```
+
+4.画图
+
+<img src="..\_static\b001.png" alt="001" style="zoom:10%;" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>重构多维数组 &mdash; Matlab 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="时间专题" href="005---%E6%97%B6%E9%97%B4%E4%B8%93%E9%A2%98.html" />
+    <link rel="prev" title="科学计算" href="003---%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Matlab
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../001---%E7%A7%91%E7%A0%94%E7%BB%98%E5%9B%BE/index.html">科研绘图</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">数据处理</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="001---%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6.html">读写文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="002---%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97.html">数据清洗</a></li>
+<li class="toctree-l2"><a class="reference internal" href="003---%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97.html">科学计算</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">重构多维数组</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#reshape">1.reshape</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#repmat">2.repmat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#squeeze">3.squeeze</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#repelem">4.repelem</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="005---%E6%97%B6%E9%97%B4%E4%B8%93%E9%A2%98.html">时间专题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="006---%E4%B8%89%E7%BB%B4%E6%95%B0%E6%8D%AE%E5%89%94%E9%99%A4%E6%97%A0%E6%95%88%E5%80%BC.html">三维数据剔除无效值</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../003---Have%20Fun/index.html">Have Fun</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../004---%E5%85%B6%E4%BB%96/index.html">其他</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Matlab</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">数据处理</a> &raquo;</li>
+      <li>重构多维数组</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/002---数据处理/004---重构多维数组.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>重构多维数组<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h1>
+<p>1.整体重复3次</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">x1</span><span class="p">=(</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">)</span><span class="o">&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="n">x2</span><span class="p">=</span><span class="nb">repmat</span><span class="p">(</span><span class="n">x1</span><span class="p">,[</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">]);</span><span class="w"></span>
+</pre></div>
+</div>
+<img src="..\_static\j1.png" alt="1" style="zoom:50%;" />
+<p>2.每个元素重复3次</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">y1</span><span class="p">=(</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">)</span><span class="o">&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="n">y2</span><span class="p">=</span><span class="nb">repelem</span><span class="p">(</span><span class="n">y1</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<img src="..\_static\j2.png" alt="1" style="zoom:50%;" />
+<p>3.二维数组、三维数组相互转化</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% 使用此功能需要安装Climate Data Toolbox</span><span class="w"></span>
+<span class="n">z1</span><span class="p">(:,:,</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">101</span><span class="w"> </span><span class="mi">103</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="n">102</span><span class="w"> </span><span class="s">104]</span><span class="p">;</span><span class="w"></span>
+<span class="n">z1</span><span class="p">(:,:,</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">201</span><span class="w"> </span><span class="mi">203</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="n">222</span><span class="w"> </span><span class="s">204]</span><span class="p">;</span><span class="w">  </span>
+<span class="n">z1</span><span class="p">(:,:,</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">301</span><span class="w"> </span><span class="mi">303</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="n">342</span><span class="w"> </span><span class="s">304]</span><span class="p">;</span><span class="w"></span>
+<span class="n">z2</span><span class="p">=</span><span class="n">cube2rect</span><span class="p">(</span><span class="n">z1</span><span class="p">);</span><span class="w"> </span><span class="c">% 三维变二维 </span><span class="w"></span>
+<span class="n">z3</span><span class="p">=</span><span class="n">rect2cube</span><span class="p">(</span><span class="n">z2</span><span class="p">,[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]);</span><span class="w"> </span><span class="c">% 恢复原状 </span><span class="w"></span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">cube2rect</span></code>将<code class="docutils literal notranslate"><span class="pre">z1(:,:,i)</span></code>将每一页中的元素按列平铺，然后将每一页组合在一起，得到<code class="docutils literal notranslate"><span class="pre">z2</span></code>，见下图。此外，可以用<code class="docutils literal notranslate"><span class="pre">rect2cube</span></code>将<code class="docutils literal notranslate"><span class="pre">z2</span></code>还原为<code class="docutils literal notranslate"><span class="pre">z1</span></code>。</p>
+<img src="..\_static\j3.png" alt="1" style="zoom:50%;" />
+<p>4.二维数组转换成四维数组</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="mi">12</span><span class="p">;</span><span class="w"></span>
+<span class="n">x</span><span class="p">=</span><span class="nb">repmat</span><span class="p">(</span><span class="n">x</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]);</span><span class="w"></span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">x(:,:,i,j)</span></code>的每个元素都是<code class="docutils literal notranslate"><span class="pre">1:12</span></code>。</p>
+<img src="..\_static\j4.png" alt="1" style="zoom:40%;" />
+<p>5.重塑四维数组的前两个维度</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">y</span><span class="p">=</span><span class="nb">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">);</span><span class="w"></span>
+<span class="n">T</span><span class="p">=</span><span class="nb">permute</span><span class="p">(</span><span class="n">y</span><span class="p">,[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]);</span><span class="w"></span>
+<span class="n">y</span><span class="p">=</span><span class="nb">reshape</span><span class="p">(</span><span class="n">T</span><span class="p">,[</span><span class="mi">12</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]);</span><span class="w"></span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">permute</span></code>通过定义<code class="docutils literal notranslate"><span class="pre">[2,1,3,4]</span></code>变换前两个维度，其实就是转置！然后<code class="docutils literal notranslate"><span class="pre">reshape</span></code>将<code class="docutils literal notranslate"><span class="pre">T</span></code>的前两个维度(4×3)按列重塑为12×1，如下图，相当于将<code class="docutils literal notranslate"><span class="pre">y</span></code>的前两个维度(3x4)按行重塑为12x1。</p>
+<img src="..\_static\j5.png" alt="1" style="zoom:40%;" />
+<p>6.多维数组的高级操作</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% x(12,1,5,6)</span><span class="w"></span>
+<span class="n">x</span><span class="p">=(</span><span class="mi">1</span><span class="p">:</span><span class="mi">12</span><span class="p">)</span><span class="o">&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="n">x</span><span class="p">=</span><span class="nb">repmat</span><span class="p">(</span><span class="n">x</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]);</span><span class="w"></span>
+<span class="c">% y(12,1,5,6)</span><span class="w"></span>
+<span class="n">y</span><span class="p">=</span><span class="nb">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">);</span><span class="w"></span>
+<span class="n">T</span><span class="p">=</span><span class="nb">permute</span><span class="p">(</span><span class="n">y</span><span class="p">,[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]);</span><span class="w"></span>
+<span class="n">y</span><span class="p">=</span><span class="nb">reshape</span><span class="p">(</span><span class="n">T</span><span class="p">,[</span><span class="mi">12</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]);</span><span class="w"></span>
+<span class="c">% =========以下是新内容========</span><span class="w"></span>
+<span class="c">% 汇总x,y至C(12,2,5,6)</span><span class="w"></span>
+<span class="n">C</span><span class="p">(:,</span><span class="mi">1</span><span class="p">,:,:)=</span><span class="n">x</span><span class="p">;</span><span class="w"></span>
+<span class="n">C</span><span class="p">(:,</span><span class="mi">2</span><span class="p">,:,:)=</span><span class="n">y</span><span class="p">;</span><span class="w"></span>
+<span class="c">% 压缩第4维度至第3维度,D(12,2,30)</span><span class="w"></span>
+<span class="n">D</span><span class="p">=</span><span class="nb">reshape</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">30</span><span class="p">);</span><span class="w"></span>
+<span class="c">% 变换第2和第3个维度,T(12,30,2)</span><span class="w"></span>
+<span class="n">T</span><span class="p">=</span><span class="nb">permute</span><span class="p">(</span><span class="n">D</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">]);</span><span class="w"></span>
+<span class="c">% 压缩前两个维度,E(360X2)</span><span class="w"></span>
+<span class="n">E</span><span class="p">=</span><span class="nb">reshape</span><span class="p">(</span><span class="n">T</span><span class="p">,[],</span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">D=reshape(C,12,2,30);</span></code>将第4维度压缩至第3维度。<code class="docutils literal notranslate"><span class="pre">D(:,:,1)==C(:,:,1,1),D(:,:,2)==C(:,:,2,1),...,D(:,:,5)==C(:,:,5,1).D(:,:,6)==C(:,:,1,2)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">T=permute(D,[1,3,2]);</span></code>转置结果见下图。可以看出，<code class="docutils literal notranslate"><span class="pre">T(:,:,1)</span></code>对应<code class="docutils literal notranslate"><span class="pre">x</span></code>，<code class="docutils literal notranslate"><span class="pre">T(:,:,2)</span></code>对应<code class="docutils literal notranslate"><span class="pre">y</span></code>。</p>
+<img src="..\_static\j7.png" alt="5" style="zoom:50%;" />
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">E=reshape(T,[],2);</span></code>将<code class="docutils literal notranslate"><span class="pre">T(:,:,1)</span></code>按列压缩至<code class="docutils literal notranslate"><span class="pre">E</span></code>的第一列，将<code class="docutils literal notranslate"><span class="pre">T(:,:,2)</span></code>按列压缩至<code class="docutils literal notranslate"><span class="pre">E</span></code>的第二列，结果见下图。</p></li>
+</ul>
+<img src="..\_static\j5.png" alt="5" style="zoom:50%;" />
+<section id="reshape">
+<h2>1.reshape<a class="headerlink" href="#reshape" title="Permalink to this headline"></a></h2>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span>#<span class="w"> </span>重构为5行2列<span class="w"></span>
+<span class="n">B</span><span class="p">=</span><span class="nb">reshape</span><span class="p">(</span><span class="n">A</span><span class="p">,[</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span><span class="w"></span>
+#<span class="w"> </span>重构为<span class="n">x行2列</span><span class="w"></span>
+<span class="n">B</span><span class="p">=</span><span class="nb">reshape</span><span class="p">(</span><span class="n">A</span><span class="p">,[],</span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="repmat">
+<h2>2.repmat<a class="headerlink" href="#repmat" title="Permalink to this headline"></a></h2>
+<p>2.1 构造经度</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">lon0</span><span class="p">=(</span><span class="o">-</span><span class="mi">180</span><span class="p">:</span><span class="mi">5</span><span class="p">:</span><span class="mi">180</span><span class="p">)</span><span class="o">&#39;</span><span class="p">;</span><span class="w"></span>
+#<span class="w"> </span><span class="mi">5183</span>×<span class="mi">1</span><span class="w"></span>
+<span class="n">lon1</span><span class="p">=</span><span class="nb">repmat</span><span class="p">(</span><span class="n">lon0</span><span class="p">,[</span><span class="mi">71</span><span class="p">,</span><span class="mi">1</span><span class="p">]);</span><span class="w"></span>
+#<span class="w"> </span><span class="mi">5183</span>×<span class="mi">1</span>×<span class="mi">25</span>×<span class="mi">365</span><span class="w"></span>
+<span class="n">lon2</span><span class="p">=</span><span class="nb">repmat</span><span class="p">(</span><span class="n">lon1</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">25</span><span class="p">,</span><span class="mi">365</span><span class="p">]);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>2.2 构造纬度</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">lat0</span><span class="p">=(</span><span class="mf">87.5</span><span class="p">:</span><span class="o">-</span><span class="mf">2.5</span><span class="p">:</span><span class="o">-</span><span class="mf">87.5</span><span class="p">)</span><span class="o">&#39;</span><span class="p">;</span><span class="w"></span>
+#<span class="w"> </span><span class="n">F1</span><span class="p">:</span><span class="mi">5183</span>×<span class="mi">1</span><span class="w"></span>
+<span class="n">lat1</span><span class="p">=</span><span class="nb">reshape</span><span class="p">(</span><span class="nb">repmat</span><span class="p">(</span><span class="n">lat0</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">73</span><span class="p">])</span><span class="o">&#39;</span><span class="p">,[</span><span class="mi">5183</span><span class="p">,</span><span class="mi">1</span><span class="p">]);</span><span class="w"></span>
+#<span class="w"> </span><span class="n">F2</span><span class="p">:</span><span class="mi">5183</span>×<span class="mi">1</span><span class="w"></span>
+<span class="n">lat1</span><span class="p">=</span><span class="nb">repelem</span><span class="p">(</span><span class="n">lat0</span><span class="p">,</span><span class="mi">73</span><span class="p">);</span><span class="w"></span>
+#<span class="w"> </span><span class="mi">5183</span>×<span class="mi">1</span>×<span class="mi">25</span>×<span class="mi">365</span><span class="w"></span>
+<span class="n">lat2</span><span class="p">=</span><span class="nb">repmat</span><span class="p">(</span><span class="n">lat1</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">25</span><span class="p">,</span><span class="mi">365</span><span class="p">]);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>2.3 构造格网数据</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span>#<span class="w"> </span><span class="mi">71</span>×<span class="mi">73</span>×<span class="mi">25</span>×<span class="mi">365</span><span class="w"></span>
+<span class="n">A</span><span class="p">=</span><span class="n">code1</span><span class="p">(</span><span class="n">id</span><span class="p">).</span><span class="n">TEC</span><span class="p">;</span><span class="w"></span>
+#<span class="w"> </span>更换维度<span class="w"></span>
+<span class="n">T</span><span class="p">=</span><span class="nb">permute</span><span class="p">(</span><span class="n">A</span><span class="p">,[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]);</span><span class="w"></span>
+#<span class="w"> </span><span class="mi">5183</span>×<span class="mi">1</span>×<span class="mi">25</span>×<span class="mi">365</span><span class="w"></span>
+<span class="n">TEC</span><span class="p">=</span><span class="nb">reshape</span><span class="p">(</span><span class="n">T</span><span class="p">,[</span><span class="mi">5183</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">25</span><span class="p">,</span><span class="mi">365</span><span class="p">]);</span><span class="w"></span>
+#<span class="w"> </span><span class="mi">5183</span>×<span class="mi">3</span>×<span class="mi">25</span>×<span class="mi">365</span><span class="w"></span>
+<span class="n">B</span><span class="p">(:,</span><span class="mi">1</span><span class="p">,:,</span><span class="mi">1</span><span class="p">:</span><span class="mi">365</span><span class="p">)=</span><span class="n">lon2</span><span class="p">;</span><span class="w"></span>
+<span class="n">B</span><span class="p">(:,</span><span class="mi">2</span><span class="p">,:,</span><span class="mi">1</span><span class="p">:</span><span class="mi">365</span><span class="p">)=</span><span class="n">lat2</span><span class="p">;</span><span class="w"></span>
+<span class="n">B</span><span class="p">(:,</span><span class="mi">3</span><span class="p">,:,</span><span class="mi">1</span><span class="p">:</span><span class="mi">365</span><span class="p">)=</span><span class="n">TEC</span><span class="p">;</span><span class="w"></span>
+#<span class="w"> </span><span class="mi">5183</span>×<span class="mi">3</span>×<span class="mi">9150</span><span class="w"></span>
+<span class="n">C</span><span class="p">=</span><span class="nb">reshape</span><span class="p">(</span><span class="n">B</span><span class="p">,</span><span class="mi">5183</span><span class="p">,</span><span class="mi">3</span><span class="p">,[]);</span><span class="c">%</span><span class="w"></span>
+#<span class="w"> </span><span class="mi">47424450</span>×<span class="mi">3</span><span class="w"></span>
+<span class="n">T</span><span class="p">=</span><span class="nb">permute</span><span class="p">(</span><span class="n">C</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">]);</span><span class="w"></span>
+<span class="n">D</span><span class="p">=</span><span class="nb">reshape</span><span class="p">(</span><span class="n">T</span><span class="p">,[],</span><span class="mi">3</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="squeeze">
+<h2>3.squeeze<a class="headerlink" href="#squeeze" title="Permalink to this headline"></a></h2>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span>#<span class="w"> </span><span class="n">A</span><span class="p">:</span><span class="mi">71</span>×<span class="mi">1</span>×<span class="mi">1</span><span class="p">=</span><span class="o">&gt;</span><span class="n">B</span><span class="p">:</span><span class="mi">71</span>×<span class="mi">1</span><span class="w"></span>
+<span class="n">B</span><span class="p">=</span><span class="nb">squeeze</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="repelem">
+<h2>4.repelem<a class="headerlink" href="#repelem" title="Permalink to this headline"></a></h2>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">lat0</span><span class="p">=(</span><span class="mf">87.5</span><span class="p">:</span><span class="o">-</span><span class="mf">2.5</span><span class="p">:</span><span class="o">-</span><span class="mf">87.5</span><span class="p">)</span><span class="o">&#39;</span><span class="p">;</span><span class="w"></span>
+#<span class="w"> </span>每个元素重复73次<span class="w"></span>
+<span class="n">lat1</span><span class="p">=</span><span class="nb">repelem</span><span class="p">(</span><span class="n">lat0</span><span class="p">,</span><span class="mi">73</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="003---%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97.html" class="btn btn-neutral float-left" title="科学计算" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="005---%E6%97%B6%E9%97%B4%E4%B8%93%E9%A2%98.html" class="btn btn-neutral float-right" title="时间专题" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, 王开心.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

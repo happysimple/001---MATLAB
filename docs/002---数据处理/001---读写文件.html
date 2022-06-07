@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>读写文件 &mdash; Matlab 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="数据清洗" href="002---%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97.html" />
+    <link rel="prev" title="数据处理" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Matlab
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../001---%E7%A7%91%E7%A0%94%E7%BB%98%E5%9B%BE/index.html">科研绘图</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">数据处理</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">读写文件</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nc">1. NC文件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#txt">2.TXT文件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#xlsx">3.XLSX文件</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="002---%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97.html">数据清洗</a></li>
+<li class="toctree-l2"><a class="reference internal" href="003---%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97.html">科学计算</a></li>
+<li class="toctree-l2"><a class="reference internal" href="004---%E9%87%8D%E6%9E%84%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84.html">重构多维数组</a></li>
+<li class="toctree-l2"><a class="reference internal" href="005---%E6%97%B6%E9%97%B4%E4%B8%93%E9%A2%98.html">时间专题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="006---%E4%B8%89%E7%BB%B4%E6%95%B0%E6%8D%AE%E5%89%94%E9%99%A4%E6%97%A0%E6%95%88%E5%80%BC.html">三维数据剔除无效值</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../003---Have%20Fun/index.html">Have Fun</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../004---%E5%85%B6%E4%BB%96/index.html">其他</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Matlab</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">数据处理</a> &raquo;</li>
+      <li>读写文件</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/002---数据处理/001---读写文件.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>读写文件<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h1>
+<section id="nc">
+<h2>1. NC文件<a class="headerlink" href="#nc" title="Permalink to this headline"></a></h2>
+<p>1.1 Read</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">ncfile</span><span class="p">=</span><span class="s">&#39;test.nc&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="n">lon</span><span class="p">=</span><span class="nb">ncread</span><span class="p">(</span><span class="n">ncfile</span><span class="p">,</span><span class="s">&#39;lon&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="n">lat</span><span class="p">=</span><span class="nb">ncread</span><span class="p">(</span><span class="n">ncfile</span><span class="p">,</span><span class="s">&#39;lat&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="n">TEC</span><span class="p">=</span><span class="nb">ncread</span><span class="p">(</span><span class="n">ncfile</span><span class="p">,</span><span class="s">&#39;TEC&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="n">TEC</span><span class="p">=</span><span class="n">TEC</span><span class="o">&#39;</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>1.2 Write</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">cid</span><span class="p">=</span><span class="nb">netcdf.create</span><span class="p">(</span><span class="s">&#39;test.nc&#39;</span><span class="p">,</span><span class="s">&#39;NC_NOWRITE&#39;</span><span class="p">);</span><span class="w"></span>
+
+<span class="n">dimidlon</span><span class="p">=</span><span class="nb">netcdf.defDim</span><span class="p">(</span><span class="n">cid</span><span class="p">,</span><span class="s">&#39;lon&#39;</span><span class="p">,</span><span class="mi">73</span><span class="p">);</span><span class="w"></span>
+<span class="n">dimidlat</span><span class="p">=</span><span class="nb">netcdf.defDim</span><span class="p">(</span><span class="n">cid</span><span class="p">,</span><span class="s">&#39;lat&#39;</span><span class="p">,</span><span class="mi">71</span><span class="p">);</span><span class="w"></span>
+<span class="n">varid1</span><span class="p">=</span><span class="nb">netcdf.defVar</span><span class="p">(</span><span class="n">cid</span><span class="p">,</span><span class="s">&#39;lon&#39;</span><span class="p">,</span><span class="s">&#39;double&#39;</span><span class="p">,</span><span class="n">dimidlon</span><span class="p">);</span><span class="w"></span>
+<span class="n">varid2</span><span class="p">=</span><span class="nb">netcdf.defVar</span><span class="p">(</span><span class="n">cid</span><span class="p">,</span><span class="s">&#39;lat&#39;</span><span class="p">,</span><span class="s">&#39;double&#39;</span><span class="p">,</span><span class="n">dimidlat</span><span class="p">);</span><span class="w"></span>
+<span class="n">varid3</span><span class="p">=</span><span class="nb">netcdf.defVar</span><span class="p">(</span><span class="n">cid</span><span class="p">,</span><span class="s">&#39;TEC&#39;</span><span class="p">,</span><span class="s">&#39;double&#39;</span><span class="p">,[</span><span class="n">dimidlon</span><span class="w"> </span><span class="n">dimidlat</span><span class="p">]);</span><span class="w"></span>
+<span class="nb">netcdf.endDef</span><span class="p">(</span><span class="n">cid</span><span class="p">);</span><span class="w"></span>
+
+<span class="nb">netcdf.putVar</span><span class="p">(</span><span class="n">cid</span><span class="p">,</span><span class="n">varid1</span><span class="p">,</span><span class="o">-</span><span class="mi">180</span><span class="p">:</span><span class="mi">5</span><span class="p">:</span><span class="mi">180</span><span class="p">);</span><span class="w"></span>
+<span class="nb">netcdf.putVar</span><span class="p">(</span><span class="n">cid</span><span class="p">,</span><span class="n">varid2</span><span class="p">,</span><span class="mf">87.5</span><span class="p">:</span><span class="o">-</span><span class="mf">2.5</span><span class="p">:</span><span class="o">-</span><span class="mf">87.5</span><span class="p">);</span><span class="w"></span>
+<span class="nb">netcdf.putVar</span><span class="p">(</span><span class="n">cid</span><span class="p">,</span><span class="n">varid3</span><span class="p">,</span><span class="n">TEC</span><span class="o">&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="nb">netcdf.close</span><span class="p">(</span><span class="n">cid</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="txt">
+<h2>2.TXT文件<a class="headerlink" href="#txt" title="Permalink to this headline"></a></h2>
+<p>2.1 读取目录文件</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">mainDir</span><span class="p">=</span><span class="s">&#39;G:\Data\Jason3\&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="n">txtFile</span><span class="p">=</span><span class="nb">dir</span><span class="p">([</span><span class="n">mainDir</span><span class="p">,</span><span class="s">&#39;*.txt&#39;</span><span class="p">]);</span><span class="w"></span>
+<span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="nb">length</span><span class="p">(</span><span class="n">txtFile</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">Path1</span><span class="p">=[</span><span class="n">mainDir</span><span class="p">,</span><span class="n">txtFile</span><span class="p">(</span><span class="nb">i</span><span class="p">).</span><span class="n">name</span><span class="p">];</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
+</pre></div>
+</div>
+<p>2.2 判断L是否包含’ABC’</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="nb">contains</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="s">&#39;ABC&#39;</span><span class="p">)</span><span class="w"></span>
+<span class="w">   </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
+</pre></div>
+</div>
+<p>2.3 读取文件,直至结束</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">while</span><span class="w"> </span><span class="o">~</span><span class="nb">feof</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">...</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
+</pre></div>
+</div>
+<p>2.4 文件指针复位到文件开头</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">frewind</span><span class="p">(</span><span class="n">fp</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>2.5 读取含文本和数字的文件</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">=</span><span class="nb">textscan</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="s">&#39;%s %d %d&#39;</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="xlsx">
+<h2>3.XLSX文件<a class="headerlink" href="#xlsx" title="Permalink to this headline"></a></h2>
+<p>3.1 Read</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">T2</span><span class="p">=</span><span class="nb">readtable</span><span class="p">(</span><span class="s">&#39;1.xlsx&#39;</span><span class="p">,</span><span class="s">&quot;VariableNamingRule&quot;</span><span class="p">,</span><span class="s">&quot;preserve&quot;</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>3.2 Write</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">varNames</span><span class="p">={</span><span class="s">&#39;lon&#39;</span><span class="p">,</span><span class="s">&#39;lat&#39;</span><span class="p">,</span><span class="s">&#39;TEC&#39;</span><span class="p">};</span><span class="w"></span>
+<span class="n">T1</span><span class="p">=</span><span class="nb">table</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span><span class="n">lat</span><span class="p">,</span><span class="n">TEC</span><span class="p">,</span><span class="s">&#39;VariableNames&#39;</span><span class="p">,</span><span class="n">varNames</span><span class="p">);</span><span class="w"></span>
+<span class="nb">writetable</span><span class="p">(</span><span class="n">T1</span><span class="p">,</span><span class="s">&#39;1.xlsx&#39;</span><span class="p">,</span><span class="s">&#39;Range&#39;</span><span class="p">,</span><span class="s">&#39;A1&#39;</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="数据处理" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="002---%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97.html" class="btn btn-neutral float-right" title="数据清洗" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, 王开心.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

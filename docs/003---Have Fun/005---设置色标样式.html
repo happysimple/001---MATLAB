@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>设置色标样式 &mdash; Matlab 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="融合图片与绘图" href="006---%E8%9E%8D%E5%90%88%E5%9B%BE%E7%89%87%E4%B8%8E%E7%BB%98%E5%9B%BE.html" />
+    <link rel="prev" title="颜色格式转换" href="004---%E9%A2%9C%E8%89%B2%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Matlab
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../001---%E7%A7%91%E7%A0%94%E7%BB%98%E5%9B%BE/index.html">科研绘图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../002---%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/index.html">数据处理</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Have Fun</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="001---%E8%B0%83%E7%94%A8%E7%99%BE%E5%BA%A6%E5%9C%B0%E5%9B%BEAPI.html">调用百度地图API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="002---%E5%9F%BA%E4%BA%8E%E9%9D%9E%E5%9D%87%E5%8C%80%E6%95%A3%E7%82%B9%E6%8B%9F%E5%90%88%E4%B8%89%E7%BB%B4%E6%9B%B2%E9%9D%A2.html">基于非均匀散点拟合三维曲面</a></li>
+<li class="toctree-l2"><a class="reference internal" href="003---%E8%BF%9B%E5%BA%A6%E6%8F%90%E9%86%92.html">进度提醒</a></li>
+<li class="toctree-l2"><a class="reference internal" href="004---%E9%A2%9C%E8%89%B2%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2.html">颜色格式转换</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">设置色标样式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="006---%E8%9E%8D%E5%90%88%E5%9B%BE%E7%89%87%E4%B8%8E%E7%BB%98%E5%9B%BE.html">融合图片与绘图</a></li>
+<li class="toctree-l2"><a class="reference internal" href="007---%E5%AE%9A%E6%97%B6%E5%99%A8.html">定时器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="008---GUI.html">GUI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="009---%E5%85%B6%E4%BB%96.html">其他</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../004---%E5%85%B6%E4%BB%96/index.html">其他</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Matlab</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Have Fun</a> &raquo;</li>
+      <li>设置色标样式</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/003---Have Fun/005---设置色标样式.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>设置色标样式<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h1>
+<p>众所周知，用<code class="docutils literal notranslate"><span class="pre">Matlab</span></code>的<code class="docutils literal notranslate"><span class="pre">colormap</span></code>画图比较丑，不少仁人志士开发了工具箱。例如：<a class="reference external" href="https://ww2.mathworks.cn/matlabcentral/fileexchange/69470-custom-colormap?s_tid=srchtitle_customcolormap_1">Custom Colormap</a>。</p>
+<p>我在其<code class="docutils literal notranslate"><span class="pre">customcolormap</span></code>的基础上做了一款GUI，如下图。</p>
+<img src="..\_static\b003.png" alt="003" style="zoom:46%;" />
+<p>点击<code class="docutils literal notranslate"><span class="pre">Copy</span></code>，就可以得到<code class="docutils literal notranslate"><span class="pre">colormap</span></code>颜色数据的相应代码，然后添加到脚本中就可以了！就是这么Easy!</p>
+<p>下面是一些示例图，这些<code class="docutils literal notranslate"><span class="pre">colormap</span></code>是我精挑细选的，我在论文中常看到！</p>
+<img src="..\_static\b002.png" alt="002" style="zoom:12%;" />
+<p><a class="reference download internal" download="" href="../_downloads/6b510dc1f9dea376bcfe8a2e74c2cb72/get_colormap.zip"><code class="xref download docutils literal notranslate"><span class="pre">GIM_TEC爬虫程序</span></code></a></p>
+<hr class="docutils" />
+<p>这里详细说一下使用方法！</p>
+<p>1.画图</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">figure</span><span class="p">;</span><span class="w"></span>
+<span class="nb">pcolor</span><span class="p">(</span><span class="nb">peaks</span><span class="p">(</span><span class="mi">50</span><span class="p">));</span><span class="w"></span>
+<span class="n">shading</span><span class="w"> </span><span class="s">interp</span><span class="w"></span>
+<span class="nb">colorbar</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<img src="..\_static\b004.png" alt="004" style="zoom:10%;" />
+<p>2.打开GUI，选择心仪的<code class="docutils literal notranslate"><span class="pre">colormap</span></code>后点击<code class="docutils literal notranslate"><span class="pre">copy</span></code></p>
+<img src="..\_static\b003.png" alt="003" style="zoom:46%;" />
+<p>3.粘贴代码至脚本，并设置colormap</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% 第一行代码是粘贴过来的</span><span class="w"></span>
+<span class="n">mycolormap</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">customcolormap</span><span class="p">(</span><span class="nb">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span><span class="n">mycolor</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">));</span><span class="w"></span>
+<span class="nb">colormap</span><span class="p">(</span><span class="n">mycolormap</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>4.画图</p>
+<img src="..\_static\b001.png" alt="001" style="zoom:10%;" />
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="004---%E9%A2%9C%E8%89%B2%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2.html" class="btn btn-neutral float-left" title="颜色格式转换" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="006---%E8%9E%8D%E5%90%88%E5%9B%BE%E7%89%87%E4%B8%8E%E7%BB%98%E5%9B%BE.html" class="btn btn-neutral float-right" title="融合图片与绘图" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, 王开心.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

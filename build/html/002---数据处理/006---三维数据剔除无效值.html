@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>三维数据剔除无效值 &mdash; Matlab 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Have Fun" href="../003---Have%20Fun/index.html" />
+    <link rel="prev" title="时间专题" href="005---%E6%97%B6%E9%97%B4%E4%B8%93%E9%A2%98.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Matlab
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../001---%E7%A7%91%E7%A0%94%E7%BB%98%E5%9B%BE/index.html">科研绘图</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">数据处理</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="001---%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6.html">读写文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="002---%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97.html">数据清洗</a></li>
+<li class="toctree-l2"><a class="reference internal" href="003---%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97.html">科学计算</a></li>
+<li class="toctree-l2"><a class="reference internal" href="004---%E9%87%8D%E6%9E%84%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84.html">重构多维数组</a></li>
+<li class="toctree-l2"><a class="reference internal" href="005---%E6%97%B6%E9%97%B4%E4%B8%93%E9%A2%98.html">时间专题</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">三维数据剔除无效值</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nan">1.查找NAN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">2.逐页操作</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../003---Have%20Fun/index.html">Have Fun</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../004---%E5%85%B6%E4%BB%96/index.html">其他</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Matlab</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">数据处理</a> &raquo;</li>
+      <li>三维数据剔除无效值</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/002---数据处理/006---三维数据剔除无效值.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>三维数据剔除无效值<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h1>
+<p>我有一个三维矩阵A(m,n,k)，三个维度依次称行、列、页。A里面<strong>随机</strong>存储了缺失值(NAN)，我希望把包含NAN的页删除掉，下面给出解决方案：</p>
+<section id="nan">
+<h2>1.查找NAN<a class="headerlink" href="#nan" title="Permalink to this headline"></a></h2>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">temp1</span><span class="p">=</span><span class="o">~</span><span class="nb">ismissing</span><span class="p">(</span><span class="n">A</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">ismissing(A)</span></code>返回和<code class="docutils literal notranslate"><span class="pre">A</span></code>相同维度的数组<code class="docutils literal notranslate"><span class="pre">temp</span></code>，如果<code class="docutils literal notranslate"><span class="pre">A(i,j,k)</span></code>是NAN，则<code class="docutils literal notranslate"><span class="pre">temp1(i,j,k)</span></code>返回逻辑1，否则返回逻辑0。这里，我对<code class="docutils literal notranslate"><span class="pre">ismissing(A)</span></code>取反，意味着如果<code class="docutils literal notranslate"><span class="pre">A(i,j,k)</span></code>是NAN，则<code class="docutils literal notranslate"><span class="pre">temp1(i,j,k)</span></code>返回逻辑0，否则返回逻辑1。再次强调一下，NAN对应逻辑0，非NAN对应逻辑1。</p>
+</section>
+<section id="id2">
+<h2>2.逐页操作<a class="headerlink" href="#id2" title="Permalink to this headline"></a></h2>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="nb">size</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">k</span><span class="p">=</span><span class="nb">all</span><span class="p">(</span><span class="n">temp1</span><span class="p">(:,:,</span><span class="nb">i</span><span class="p">),[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]);</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">k</span><span class="w"></span>
+<span class="w">       </span><span class="n">temp2</span><span class="p">(</span><span class="nb">i</span><span class="p">)=</span><span class="nb">true</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">else</span><span class="w"></span>
+<span class="w">       </span><span class="n">temp2</span><span class="p">(</span><span class="nb">i</span><span class="p">)=</span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
+</pre></div>
+</div>
+<p>遍历A的每一页，用<code class="docutils literal notranslate"><span class="pre">temp2</span></code>记录每一页是否包含NAN，如果包含NAN，则<code class="docutils literal notranslate"><span class="pre">temp2是true</span></code>，否则<code class="docutils literal notranslate"><span class="pre">temp2是false</span></code>。问题的核心就在于如何衡量是否包含NAN，这里用到了<code class="docutils literal notranslate"><span class="pre">k=all(temp1(:,:,i),[1,2])</span></code>，如果<code class="docutils literal notranslate"><span class="pre">temp1(:,:,i)</span></code>有逻辑0(也就是有NAN)，则返回逻辑0，如果<code class="docutils literal notranslate"><span class="pre">temp1(:,:,i)</span></code>全是逻辑1（也就是无NAN），则返回逻辑1。如果我们现在得到了<code class="docutils literal notranslate"><span class="pre">temp2</span></code>，我们只需要用<code class="docutils literal notranslate"><span class="pre">A=</span> <span class="pre">A(:,:,temp2);</span></code>就可以得到无NAN的数组了。</p>
+<p>不知道你有没有看懂，看懂看不懂，一切随缘~~</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="005---%E6%97%B6%E9%97%B4%E4%B8%93%E9%A2%98.html" class="btn btn-neutral float-left" title="时间专题" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../003---Have%20Fun/index.html" class="btn btn-neutral float-right" title="Have Fun" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, 王开心.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

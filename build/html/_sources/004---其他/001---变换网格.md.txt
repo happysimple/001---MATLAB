@@ -1,0 +1,61 @@
+# 变换网格
+
+```{note}
+使用此功能需要安装Climate Data Toolbox
+```
+
+## 1.引入
+
+你使用过以经度、纬度为横纵坐标的格网数据吗？``If Ture``，你可能会遇到以下场景：你的格网数据经度范围是$-180°-180°$,但是，你需要转换成$0°-360°$。怎么办呢？常规方法是把格网数据分成两半，进行拼接。可是如果你想将地图中心固定为``121°E``呢?那可就难办了！
+
+## 2.解决办法
+
+Climate Data Toolbox工具箱提供了``recenter``函数，帮你一步解决问题！如下：
+
+```matlab
+[lat2,lon2,TEC2] = recenter(lat1,lon1,TEC1,'center',121);
+```
+
+$lat1,lon1,TEC1$是你现在有的数据，$lat2,lon2,TEC2$是转换后的数据，`center`是地图中心的经度！
+
+## 3.实例
+
+下面我们以$-180°-180°$转化为$0°-360°$详细讲讲！
+
+1.构造数据
+
+```matlab
+[lon1,lat1] = meshgrid(-180:5:180,87.5:-2.5:-87.5);
+TEC1 = randn(71,73);
+for i=1:73
+    TEC1(:,i)=TEC1(:,i)+i;
+end
+```
+
+2.绘制原始图
+
+```matlab
+subplot(2,1,1);
+pcolor(lon1,lat1,TEC1);
+colorbar;
+shading interp
+colormap(cmocean('balance'))
+```
+
+3.转换网格
+
+```matlab
+[lat2,lon2,TEC2] = recenter(lat1,lon1,TEC1,'center',180);
+```
+
+4.绘制变换后的图
+
+```matlab
+subplot(2,1,2);
+pcolor(lon2,lat2,TEC2);
+colorbar;
+shading interp
+colormap(cmocean('balance'))
+```
+
+<img src="..\_static\441.png" alt="001" style="zoom:12%;" />
