@@ -1,0 +1,55 @@
+# 调整格网分辨率
+
+```{tip}
+使用此功能需要安装Climate Data Toolbox
+```
+
+1.绘制原图
+
+```matlab
+[X,Y,Z] = peaks(20);
+figure
+hold on
+imagescn(X,Y,Z)
+plot(X,Y,'k.')
+axis tight
+hold off
+```
+
+<img src="..\_static\105_1.png" alt="001" style="zoom:12%;" />
+
+---
+
+2.减小分辨率至原来的1/3
+
+```matlab
+figure
+[Zr,Xr,Yr] = demresize(Z,X,Y,1/3);
+imagescn(Xr,Yr,Zr);
+```
+
+<img src="..\_static\105_2.png" alt="004" style="zoom:12%;" />
+
+---
+
+3.增大分辨率至原来的10倍
+
+```matlab
+[Zr,Xr,Yr] = demresize(Z,X,Y,10);
+imagescn(Xr,Yr,Zr);
+```
+
+<img src="..\_static\105_3.png" alt="003" style="zoom:12%;" />
+
+---
+
+4.基于散点表达格网图
+
+
+```matlab
+figure;
+[Zr,Xr,Yr] = demresize(Z,X,Y,1/3);
+scatter(Xr(:),Yr(:),100,Zr(:),'filled','markeredgecolor','k');
+```
+
+<img src="..\_static\105_4.png" alt="003" style="zoom:12%;" />

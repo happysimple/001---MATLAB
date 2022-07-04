@@ -1,0 +1,36 @@
+# 数据游标
+
+```matlab
+clear;clc;
+% 数据
+A=table2array(readtable('临时数据.xlsx'));
+X=A(:,4);% 经度
+Y=A(:,5);% 纬度
+Z=A(:,6);% 高度
+T=A(:,2);% 温度
+S=A(:,3);% 湿度
+
+% 绘图
+h=scatter3(X,Y,Z,50,T,'.');
+h.UserData=A;
+
+% 加载数据游标
+dcm = datacursormode;
+dcm.DisplayStyle = 'datatip';
+dcm.UpdateFcn = @displayCoordinates;
+
+function txt = displayCoordinates(~,info)
+    x = info.Position(1);
+    y = info.Position(2);
+    z = info.Position(3);
+    A = info.Target.UserData;
+    id = info.Target.Children.DataIndex;
+    t = A(id,2);
+    s = A(id,3);
+    txt = {['经度=',num2str(x)];['纬度=',num2str(y)];['高度=',num2str(z)];
+        ['温度=',num2str(t)];['湿度=',num2str(s)]};
+end
+```
+
+
+

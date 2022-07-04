@@ -1,0 +1,39 @@
+# 共用色标
+
+<img src="..\_static\103.png" alt="001" style="zoom:20%;" />
+
+```matlab
+% 加载数据
+Z1=peaks(50);
+Z2=peaks(50);
+
+% 布局
+h=tiledlayout(2,2);
+h.TileSpacing='none';
+h.Padding='compact';
+
+% 图1
+ax1=nexttile([1 2]);
+contourf(Z1);
+xticklabels([]);
+
+% 图2
+ax2=nexttile([1 2]);
+contourf(Z2);
+
+% colorbar
+h=colorbar;
+h.Layout.Tile ='east';
+h.Label.String='H/m';
+h.Label.Rotation=0;
+h.Label.Position=[0.48,6.8,0];
+colormap(jet(12));
+caxis([-6,6]);
+
+% 调节尺寸
+set(gcf,'Units','centimeters','Position',[8 5 15 8]);
+
+% 导出图片
+exportgraphics(gcf,'001.png','Resolution',600);
+```
+

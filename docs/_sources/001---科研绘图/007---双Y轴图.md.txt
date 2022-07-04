@@ -1,0 +1,40 @@
+# 双Y轴图
+
+<img src="..\_static\007.png" alt="007" style="zoom:20%;" />
+
+```matlab
+% 加载数据
+x=1:100;
+y1=1+rand(100,1);
+y2=10+rand(100,1);
+
+% Y1
+yyaxis left
+plot(x,y1,'LineWidth',1.2,'Color',[0.502 0.6941 0.8275]);
+ax=gca;
+ax.YColor=[0.502 0.6941 0.8275];
+ax.LineWidth=1.2;
+ylim([0,5]);
+ylabel('Y1');
+
+% Y2
+yyaxis right
+h=plot(x,y2,'LineWidth',1.2,'Color',[0.9843 0.502 0.4471]);
+ax=gca;
+ax.YColor=[0.9843 0.502 0.4471];
+ax.LineWidth=1.2;
+ylim([8,12]);
+ylabel('Y2');
+
+% X
+xlabel('X轴');
+legend('Line1','Line2');
+
+% 调节尺寸
+set(gcf,'Units','centimeters','Position',[2 2 15 8]);
+
+% 导出图片
+exportgraphics(gcf,'001.png','Resolution',600);
+
+```
+

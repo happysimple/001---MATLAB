@@ -1,119 +1,5 @@
 # 调用百度地图API
 
-本文主题：读取照片，在Matlab中显示地图，在地图上显示拍摄照片的位置
-
-## 1.开启相机的地理位置选项，拍摄照片
-![在这里插入图片描述](https://img-blog.csdnimg.cn/75b7b80ae7b44c839705e6bebfff8b56.png#pic_center)
-
----
-
-## 2.读取照片
-
-```matlab
-%% 打开照片
-[filename1, pathname1] = uigetfile({'*.jpg';'*.*'});
-
-%% 读取照片经纬度信息
-info = imfinfo([pathname1,filename1]);
-lon = info.GPSInfo.GPSLongitude;
-lon = lon(1)+lon(2)/60+lon(3)/3600;
-lat = info.GPSInfo.GPSLatitude;
-lat =lat(1)+lat(2)/60+lat(3)/3600;
-center=[num2str(lon),',',num2str(lat)];
-```
-
-代码中的center变量记录了照片的经纬度信息，稍后会用到！
-
----
-
-## 3.申请百度地图开放平台密钥
-
-- 地址：[获取密钥](https://lbsyun.baidu.com/apiconsole/key?application=key#/home)
-
-- 应用类型：服务端
-
-- IP白名单：0.0.0.0/0
-
-注意下图中的AK，稍后会用到
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/6ea0da22c0794961823cb4add285766f.png#pic_center)
-
----
-
-## 4.坐标转换API
-- 地址：[坐标转换](https://lbsyun.baidu.com/index.php?title=webapi/guide/changeposition)
-- 作用：将非百度坐标转换成百度地图中使用的坐标
-
-### (1)查看请求格式
-
-
-
-
-
-参考下面这一串”网址“，明确用到了哪些变量（红框里的就是变量）
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/93d35dd6a8764669b86ec73088d14245.png#pic_center)
-
-
-
-
----
-
-### (2)构建请求
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/59cfa2fb63244ff2bce0d914b133b623.png#pic_center)
-
-- coords是我们从照片中读取的坐标(上文中的center变量)
-- ak是申请密钥后生成的
-- 由于center是GPS标准坐标，from选择为1
-- 由于我们要转化为百度地图采用的经纬度坐标，to选5
-
-至此，你可以构造出请求了，代码如下！
-
-```matlab
-API='http://api.map.baidu.com/geoconv/v1/';
-ak='xxxxxxxxxxxxxxxxxxxxxx';
-output= webread(API,'ak',ak,'coords',center,'from',1,'to',5);
-```
-
----
-
-### (3)结果参数
-
-请求后，百度地图会返回结果，见下图，x和y就是转换后的经度、纬度，获取x和y的代码如下。
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/55e5485ebaab403ca422c4040798edf7.png#pic_center)
-
-```matlab
-lon=output.result.x;
-lat=output.result.y;
-center=[num2str(lon),',',num2str(lat)];
-```
-
----
-
-## 5.静态图API
-
-- 地址：[静态图API](https://lbsyun.baidu.com/index.php?title=static)
-
-- 作用：以图片形式嵌入到Matlab中
-
-> 具体实现类似“坐标转换API”，这里不多赘述
-
-```matlab
-%% 静态图
-API='http://api.map.baidu.com/staticimage/v2';
-width=600;
-height=400;
-zoom=15;
-[data,colormap]= webread(API,'ak',ak,'width',width,'height',height,...
-                               'center',center,'zoom',zoom,'markers',center);
-figure;
-imshow(data,colormap);
-```
-
-## 6.完整代码
-
 ```matlab
 %% 结合百度地图API确定照片的拍摄位置
 clear;clc;
@@ -131,6 +17,7 @@ center=[num2str(lon),',',num2str(lat)];
 
 %% 坐标转换
 API='http://api.map.baidu.com/geoconv/v1/';
+% 需要自己申请密钥：https://lbsyun.baidu.com/apiconsole/key?application=key#/home
 ak='xxxxxxxxxxxxxxxxxxxxxx';
 output= webread(API,'ak',ak,'coords',center,'from',1,'to',5);
 lon=output.result.x;

@@ -1,0 +1,60 @@
+# 极值处绘制黑点
+```{tip}
+使用此功能需要安装Climate Data Toolbox
+```
+
+1.二维
+
+<img src="..\_static\102_1.png" alt="001" style="zoom:20%;" />
+
+```matlab
+% 加载数据
+[X,Y,Z] = peaks(1000);
+
+% 绘图
+pcolor(X,Y,Z)
+shading interp
+hold on
+mask = Z>2.5;
+stipple(X,Y,mask,'color',[0,0,0],'density',100,'marker','.','markersize',10);
+xlabel('X');
+ylabel('Y');
+
+% 调节尺寸
+set(gcf,'Units','centimeters','Position',[8 5 15 8]);
+
+% 导出图片
+exportgraphics(gcf,'001.png','Resolution',600);
+```
+
+2.三维
+
+<img src="..\_static\102_2.png" alt="001" style="zoom:20%;" />
+
+```matlab
+% 加载数据
+[X,Y,Z] = peaks(1000);
+
+% 绘图
+surf(X,Y,Z)
+shading interp
+hold on
+h=stipple(X,Y,mask,'color',[0,0,0],'density',100,'marker','.','markersize',6);
+x=X(mask);
+y=Y(mask);
+z=Z(mask);
+h.XData=x(1:500:end);
+h.YData=y(1:500:end);
+h.ZData=z(1:500:end);
+xlabel('X');
+ylabel('Y');
+
+% 调节尺寸
+set(gcf,'Units','centimeters','Position',[8 5 15 8]);
+
+% 导出图片
+exportgraphics(gcf,'001.png','Resolution',600);
+```
+
+
+

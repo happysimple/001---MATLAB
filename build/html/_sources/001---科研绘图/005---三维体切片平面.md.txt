@@ -1,0 +1,32 @@
+# 三维体切片图
+
+<img src="..\_static\005.png" alt="014" style="zoom:20%;" />
+
+```matlab
+% 加载数据
+P = -2.5 + 5*rand([200 3]);
+v = sin(P(:,1).^2 + P(:,2).^2 + P(:,3).^2)./(P(:,1).^2+P(:,2).^2+P(:,3).^2);
+
+% 创建插值
+F = scatteredInterpolant(P,v);
+
+% 查询(xq,yq,zq)处的插值
+[xq,yq,zq] = meshgrid(-2:0.25:2);
+vq = F(xq,yq,zq);
+
+% 绘制切片
+xslice = [-0.5,1,2]; 
+yslice = [0,2]; 
+zslice = [-2,0];
+figure;
+slice(xq,yq,zq,vq,xslice,yslice,zslice,'cubic');
+
+% 调节尺寸
+set(gcf,'Units','centimeters','Position',[8 5 15 8]);
+
+% 导出图片
+exportgraphics(gcf,'001.png','Resolution',600);
+```
+
+
+

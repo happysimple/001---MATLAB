@@ -1,0 +1,47 @@
+# 图片转动图和视频
+
+## 1. 动图
+
+```matlab
+x=0:0.1:2*pi;
+for i=1:20
+    y=sin(x+i*pi/4);
+    plot(x,y,'LineWidth',2);
+    xlim([0,2*pi]);
+    
+    frame=getframe(gcf);
+    im=frame2im(frame);
+    [A{i},map{i}]=rgb2ind(im,256);
+end
+
+filename='1.gif';
+for i=1:length(A)
+    if i == 1
+        imwrite(A{i},map{i},filename,'gif','LoopCount',Inf,'DelayTime',0.2);
+    else
+        imwrite(A{i},map{i},filename,'gif','WriteMode','append','DelayTime',0.2);
+    end
+end
+```
+
+## 2. 视频
+
+```matlab
+x=0:0.1:2*pi;
+for i=1:20
+    y=sin(x+i*pi/4);
+    plot(x,y,'LineWidth',2);
+    xlim([0,2*pi]);
+    frame{i}=getframe(gcf);
+end
+
+myVideo=VideoWriter('1.avi'); 
+myVideo.FrameRate=4;
+open(myVideo);
+for i=1:length(frame)
+    writeVideo(myVideo,frame{i});
+end
+close(myVideo);
+```
+
+## 

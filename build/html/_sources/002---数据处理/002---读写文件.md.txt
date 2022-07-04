@@ -1,0 +1,91 @@
+# 读写文件
+
+## 1. NC文件
+
+1.1 Read
+
+```matlab
+ncfile='test.nc';
+lon=ncread(ncfile,'lon');
+lat=ncread(ncfile,'lat');
+TEC=ncread(ncfile,'TEC');
+TEC=TEC';
+```
+
+1.2 Write
+
+```matlab
+cid=netcdf.create('test.nc','NC_NOWRITE');
+
+dimidlon=netcdf.defDim(cid,'lon',73);
+dimidlat=netcdf.defDim(cid,'lat',71);
+varid1=netcdf.defVar(cid,'lon','double',dimidlon);
+varid2=netcdf.defVar(cid,'lat','double',dimidlat);
+varid3=netcdf.defVar(cid,'TEC','double',[dimidlon dimidlat]);
+netcdf.endDef(cid);
+
+netcdf.putVar(cid,varid1,-180:5:180);
+netcdf.putVar(cid,varid2,87.5:-2.5:-87.5);
+netcdf.putVar(cid,varid3,TEC');
+netcdf.close(cid);
+```
+
+---
+
+## 2.TXT文件
+
+2.1 读取目录文件
+
+```matlab
+mainDir='G:\Data\Jason3\';
+txtFile=dir([mainDir,'*.txt']);
+for i=1:length(txtFile)
+    Path1=[mainDir,txtFile(i).name];
+end
+```
+
+2.2 判断L是否包含'ABC'
+
+```matlab
+if contains(L,'ABC')
+   break;
+end
+```
+
+2.3 读取文件,直至结束
+
+```matlab
+while ~feof(fp)
+    ...
+end
+```
+
+2.4 文件指针复位到文件开头
+
+```matlab
+frewind(fp);
+```
+
+2.5 读取含文本和数字的文件
+
+```matlab
+A=textscan(L,'%s %d %d');
+```
+
+---
+
+## 3.XLSX文件
+
+3.1 Read
+
+```matlab
+T2=readtable('1.xlsx',"VariableNamingRule","preserve");
+```
+
+3.2 Write
+
+```matlab
+varNames={'lon','lat','TEC'};
+T1=table(lon,lat,TEC,'VariableNames',varNames);
+writetable(T1,'1.xlsx','Range','A1');
+```

@@ -1,0 +1,33 @@
+# 异常时间序列图
+```{tip}
+使用此功能需要安装Climate Data Toolbox
+```
+<img src="..\_static\004.png" alt="001" style="zoom:20%;" />
+
+```matlab
+clear;clc;
+% 加载数据
+x = 1990:1/12:2000;
+y = 10*sin(2*pi*x) + randn(size(x));
+
+% 绘图
+figure;
+box on
+anomaly(x,y,'thresh',[-5 5],'top',[0.4196 0.6824 0.8392],...
+    'bottom',[0.9843 0.502 0.4471],'LineWidth',1.0,'LineStyle','-');
+xlabel('Year');
+ylabel('TEC');
+
+% 调节尺寸
+set(gcf,'Units','centimeters','Position',[2 2 15 8]);
+
+% 导出图片
+exportgraphics(gcf,'003.png','Resolution',600)
+```
+
+
+
+
+
+
+

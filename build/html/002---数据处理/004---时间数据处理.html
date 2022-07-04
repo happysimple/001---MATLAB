@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>时间专题 &mdash; Matlab 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="变换网格" href="005---%E5%8F%98%E6%8D%A2%E7%BD%91%E6%A0%BC.html" />
+    <link rel="prev" title="数据清洗" href="003---%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Matlab
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../001---%E7%A7%91%E7%A0%94%E7%BB%98%E5%9B%BE/index.html">科研绘图</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">数据处理</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="001---%E7%88%AC%E5%8F%96%E6%95%B0%E6%8D%AE.html">爬取数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="002---%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6.html">读写文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="003---%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97.html">数据清洗</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">时间专题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="005---%E5%8F%98%E6%8D%A2%E7%BD%91%E6%A0%BC.html">变换网格</a></li>
+<li class="toctree-l2"><a class="reference internal" href="006---%E9%87%8D%E6%9E%84%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84.html">重构多维数组</a></li>
+<li class="toctree-l2"><a class="reference internal" href="007---%E4%B8%89%E7%BB%B4%E6%95%B0%E6%8D%AE%E5%89%94%E9%99%A4%E6%97%A0%E6%95%88%E5%80%BC.html">三维数据剔除无效值</a></li>
+<li class="toctree-l2"><a class="reference internal" href="008---%E5%9F%BA%E4%BA%8E%E9%9D%9E%E5%9D%87%E5%8C%80%E6%95%A3%E7%82%B9%E6%8B%9F%E5%90%88%E4%B8%89%E7%BB%B4%E6%9B%B2%E9%9D%A2.html">基于非均匀散点拟合三维曲面</a></li>
+<li class="toctree-l2"><a class="reference internal" href="009---%E6%8F%90%E5%8F%96%E6%B5%B7%E6%B4%8B%E6%88%96%E9%99%86%E5%9C%B0%E6%95%B0%E6%8D%AE.html">提取海洋或陆地数据</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../003---Have%20Fun/index.html">Have Fun</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Matlab</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">数据处理</a> &raquo;</li>
+      <li>时间专题</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/002---数据处理/004---时间数据处理.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>时间专题<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h1>
+<p>1.世界时转当地时间</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span>#<span class="w"> </span><span class="n">UT</span><span class="p">(</span><span class="mi">1</span><span class="p">,:)</span><span class="o">-</span>年月日时分秒<span class="w"></span>
+<span class="n">dh</span><span class="p">=</span><span class="nb">round</span><span class="p">(</span><span class="n">lon</span><span class="o">/</span><span class="mi">15</span><span class="p">);</span><span class="w"></span>
+<span class="n">dmin</span><span class="p">=</span><span class="nb">round</span><span class="p">((</span><span class="n">lon</span><span class="o">/</span><span class="mi">15</span><span class="o">-</span><span class="n">dh</span><span class="p">)</span><span class="o">*</span><span class="mi">60</span><span class="p">);</span><span class="w"></span>
+<span class="n">LT1</span><span class="p">=</span><span class="nb">datenum</span><span class="p">(</span><span class="n">UT1</span><span class="p">(:,</span><span class="mi">1</span><span class="p">),</span><span class="n">UT1</span><span class="p">(:,</span><span class="mi">2</span><span class="p">),</span><span class="n">UT1</span><span class="p">(:,</span><span class="mi">3</span><span class="p">),</span><span class="n">UT1</span><span class="p">(:,</span><span class="mi">4</span><span class="p">)</span><span class="o">+</span><span class="n">dh</span><span class="p">,</span><span class="n">UT1</span><span class="p">(:,</span><span class="mi">5</span><span class="p">)</span><span class="o">+</span><span class="n">dmin</span><span class="p">,</span><span class="n">UT1</span><span class="p">(:,</span><span class="mi">6</span><span class="p">));</span><span class="w"></span>
+<span class="n">LT1</span><span class="p">=</span><span class="nb">datevec</span><span class="p">(</span><span class="n">LT1</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>2.计算年积日</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span>#<span class="w"> </span><span class="n">F1</span><span class="w"></span>
+<span class="n">doy</span><span class="p">=</span><span class="nb">datenum</span><span class="p">(</span><span class="n">UT1</span><span class="p">(:,</span><span class="mi">1</span><span class="p">),</span><span class="n">UT1</span><span class="p">(:,</span><span class="mi">2</span><span class="p">),</span><span class="n">UT1</span><span class="p">(:,</span><span class="mi">3</span><span class="p">))</span><span class="o">-</span><span class="nb">datenum</span><span class="p">(</span><span class="n">UT1</span><span class="p">(:,</span><span class="mi">1</span><span class="p">),</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+#<span class="w"> </span><span class="n">F2</span><span class="w"></span>
+<span class="n">doy</span><span class="p">=</span><span class="nb">day</span><span class="p">(</span><span class="nb">datetime</span><span class="p">(</span><span class="n">UT1</span><span class="p">),</span><span class="s">&#39;dayofyear&#39;</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>3.根据年积日计算日期</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">T</span><span class="p">=</span><span class="nb">datetime</span><span class="p">(</span><span class="mi">2012</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">doy</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>4.判断一年有多少天</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">Days</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">yeardays</span><span class="p">(</span><span class="mi">2001</span><span class="p">)</span><span class="w"> </span>
+</pre></div>
+</div>
+<p>5.判断一月有多少天</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">Days</span><span class="p">=</span><span class="nb">eomday</span><span class="p">(</span><span class="mi">2001</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>6.T1=2012-06-22 12:10:00，计算50min后对应的时间</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">T2</span><span class="p">=</span><span class="nb">addtodate</span><span class="p">(</span><span class="nb">datenum</span><span class="p">(</span><span class="n">T1</span><span class="p">),</span><span class="mi">50</span><span class="p">,</span><span class="s">&#39;minute&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="n">T2</span><span class="p">=</span><span class="nb">datestr</span><span class="p">(</span><span class="n">T2</span><span class="p">,</span><span class="s">&#39;yyyy-mm-dd HH:MM:SS&#39;</span><span class="p">);</span><span class="w"> </span>
+</pre></div>
+</div>
+<p>7.T1=2000-01-01 00:00:00；T2=2000-01-01 00:01:00，计算两个日期之间的秒数</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">T1</span><span class="p">=</span><span class="nb">datevec</span><span class="p">(</span><span class="s">&#39;2000-01-01 00:00:00&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="n">T2</span><span class="p">=</span><span class="nb">datevec</span><span class="p">(</span><span class="s">&#39;2000-01-01 00:01:00&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="n">dT</span><span class="p">=</span><span class="w"> </span><span class="nb">etime</span><span class="p">(</span><span class="n">T2</span><span class="p">,</span><span class="n">T1</span><span class="p">)</span><span class="w"> </span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="003---%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97.html" class="btn btn-neutral float-left" title="数据清洗" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="005---%E5%8F%98%E6%8D%A2%E7%BD%91%E6%A0%BC.html" class="btn btn-neutral float-right" title="变换网格" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, 王开心.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

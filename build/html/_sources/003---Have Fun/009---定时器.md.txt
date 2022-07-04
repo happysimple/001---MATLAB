@@ -1,0 +1,33 @@
+# 定时器
+
+场景一：每隔一段时间发送一次消息
+
+```matlab
+t = timer;
+t.TasksToExecute = 5; % 发送消息的次数
+t.Period=1;% 发送消息的间隔
+t.ExecutionMode='fixedSpacing';
+t.TimerFcn=@takeBreak;
+start(t)
+
+function takeBreak(~,~)
+    disp('你好！');
+end
+```
+
+场景二：到达某时间点发送消息
+
+```matlab
+t=timer;
+set(t,'TimerFcn',@sendmessage,'Period',1,'ExecutionMode','fixedSpacing');
+start(t);
+
+function sendmessage(hobj,~)
+    T=datestr(now,'HH:MM');
+    if strcmp(T,'19:25')
+        stop(hobj);
+        delete(hobj);
+        disp('你好！');
+    end
+end
+```

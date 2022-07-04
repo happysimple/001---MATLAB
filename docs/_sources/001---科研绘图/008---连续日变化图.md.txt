@@ -1,0 +1,41 @@
+# 连续日变化图
+
+<img src="..\_static\008.png" alt="010" style="zoom:20%;" />
+
+```matlab
+% 制作时间变量,时间范围:2012/01/01 06:00至2012/01/03 18:00
+h=hours(0:2:23);
+d1=datetime('2012-01-01');
+d2=datetime('2012-01-02');
+d3=datetime('2012-01-03');
+T1=d1+h;
+T2=d2+h;
+T3=d3+h;
+T=[T1(4:end),T2,T3(1:end-2)];
+
+% 制作因变量
+X=linspace(0,2*pi,length(T));
+Y=sin(X);
+
+% 绘图
+hold on
+plot(datenum(T),Y,'LineWidth',1.2);
+datetick('x','HH');
+idx1=find(datetime(2012,01,02,00,00,00)==T);
+idx2=find(datetime(2012,01,03,00,00,00)==T);
+xline(datenum(T(idx1)),'LineWidth',1.2);
+xline(datenum(T(idx2)),'LineWidth',1.2);
+xlabel('Time');
+ylabel('TEC');
+title('Title');
+set(gca,'LineWidth',1.2);
+box on
+hold off
+
+% 调节尺寸
+set(gcf,'Units','centimeters','Position',[2 2 20 8]);
+
+% 导出图片
+exportgraphics(gcf,'001.png','Resolution',600);
+```
+

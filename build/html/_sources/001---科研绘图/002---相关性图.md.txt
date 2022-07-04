@@ -1,0 +1,44 @@
+# 相关性图
+
+<img src="..\_static\002.png" alt="014" style="zoom:20%;" />
+
+```matlab
+% 加载数据
+x = 1:100;
+y = linspace(10,40,100) + 10*rand(1,100);
+
+% 绘制散点图
+hold on
+box on
+scatter(x,y,50,'filled','MarkerFaceColor',[0.1961,0.5333,0.7412],...
+    'MarkerEdgeColor',[0.5882 0.5882 0.5882],'MarkerFaceAlpha',0.5);
+xlabel('F10.7 (sfu)');
+ylabel('TEC (TECU)');
+
+% 绘制拟合曲线
+p=polyfit(x,y,1);
+a=p(1);
+b=p(2);
+x0=[0,100];
+y0=[a*x0(1)+b,a*x0(2)+b];
+plot(x0,y0,'-','LineWidth',1.2,'Color',[0.9569 0.4275 0.2627]);
+
+% 计算相关系数
+R=corrcoef(x,y);
+R=sprintf('%.2f',R(1,2));
+
+% 绘制文本框
+h=annotation('textbox',[.15 .82 .099 .07],'String',['R=',R],...
+    'HorizontalAlignment','center');
+h.FitBoxToText='on';
+hold off
+
+% 调节尺寸
+set(gcf,'Units','centimeters','Position',[8 5 15 8]);
+
+% 导出图片
+exportgraphics(gcf,'001.png','Resolution',600);
+```
+
+
+

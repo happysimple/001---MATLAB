@@ -1,0 +1,9 @@
+# 右键设置
+
+```matlab
+fig=gcf;
+cm=uicontextmenu(fig);
+l=findobj(fig.Children,'Type','Line');
+l.UIContextMenu=cm;
+uimenu(cm,'Label','设置','Callback',c1);
+```

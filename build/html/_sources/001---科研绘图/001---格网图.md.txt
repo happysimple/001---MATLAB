@@ -1,0 +1,48 @@
+# 格网图
+
+<img src="..\_static\001.png" alt="005" style="zoom:20%;" />
+
+```matlab
+clear;clc;
+% 数据
+x=-2:0.1:2;
+y=-2:0.1:3;
+[X,Y]=meshgrid(x,y);
+Z=peaks(X,Y);
+
+% 平滑数据
+K=(1/9)*ones(3);
+Z=conv2(Z,K,'same');
+
+% 绘图
+surf(X,Y,Z);
+view(2);
+shading interp
+xlabel('X');
+ylabel('Y');
+title('Title');
+
+% 设置colorbar
+h=colorbar;
+h.FontSize=10;
+h.Label.String='H (m)';
+h.Label.Rotation=0;
+h.Label.Position=[0.56,8.88,0];
+h.Label.FontSize=10;
+caxis([2,6]);
+
+% 以下命令需要安装get_colormap,若不安装可以使用colormap(jet)
+mycolormap = customcolormap(linspace(0,1,8),mycolor(9,01));
+colormap(mycolormap)
+
+% 以下命令需要安装Climate Data Toolbox,若不安装删除即可
+c=cbarrow;
+c.Children(2).EdgeColor=[0 0 0];
+c.Children(3).EdgeColor=[0 0 0];
+
+% 调节尺寸
+set(gcf,'Units','centimeters','Position',[8 5 15 8]);
+
+% 导出图片
+exportgraphics(gcf,'001.png','Resolution',600);
+```

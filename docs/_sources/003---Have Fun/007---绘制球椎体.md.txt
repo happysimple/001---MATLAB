@@ -1,0 +1,16 @@
+# 绘制球椎体
+
+```matlab
+hold on
+[X1,Y1,Z1]=cylinder(linspace(0,1,1000),100);
+Z1(Z1>sqrt(2)/2)=NaN;
+surf(X1,Y1,Z1);
+
+[X2,Y2,Z2]=sphere(1000);
+Z2(Z2<sqrt(2)/2)=NaN;
+surf(X2,Y2,Z2);
+
+shading flat
+view(30,30);
+hold off
+```

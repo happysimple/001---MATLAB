@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>绘制球椎体 &mdash; Matlab 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="数据游标" href="008---%E6%95%B0%E6%8D%AE%E6%B8%B8%E6%A0%87.html" />
+    <link rel="prev" title="右键设置" href="006---%E5%8F%B3%E9%94%AE%E8%AE%BE%E7%BD%AE.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Matlab
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../001---%E7%A7%91%E7%A0%94%E7%BB%98%E5%9B%BE/index.html">科研绘图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../002---%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/index.html">数据处理</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Have Fun</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="001---%E8%B0%83%E7%94%A8%E7%99%BE%E5%BA%A6%E5%9C%B0%E5%9B%BEAPI.html">调用百度地图API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="002---%E8%9E%8D%E5%90%88%E5%9B%BE%E7%89%87%E4%B8%8E%E7%BB%98%E5%9B%BE.html">融合图片与绘图</a></li>
+<li class="toctree-l2"><a class="reference internal" href="003---%E6%88%AA%E5%B1%8F.html">截屏</a></li>
+<li class="toctree-l2"><a class="reference internal" href="004---%E5%9B%BE%E7%89%87%E8%BD%AC%E5%8A%A8%E5%9B%BE%E5%92%8C%E8%A7%86%E9%A2%91.html">图片转动图和视频</a></li>
+<li class="toctree-l2"><a class="reference internal" href="005---%E8%8E%B7%E5%8F%96RGB.html">获取RGB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="006---%E5%8F%B3%E9%94%AE%E8%AE%BE%E7%BD%AE.html">右键设置</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">绘制球椎体</a></li>
+<li class="toctree-l2"><a class="reference internal" href="008---%E6%95%B0%E6%8D%AE%E6%B8%B8%E6%A0%87.html">数据游标</a></li>
+<li class="toctree-l2"><a class="reference internal" href="009---%E5%AE%9A%E6%97%B6%E5%99%A8.html">定时器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="010---%E8%BF%9B%E5%BA%A6%E6%8F%90%E9%86%92.html">进度提醒</a></li>
+<li class="toctree-l2"><a class="reference internal" href="011---%E9%A2%9C%E8%89%B2%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2.html">颜色格式转换</a></li>
+<li class="toctree-l2"><a class="reference internal" href="012---getcolormap%28GUI%29.html">getcolormap(GUI)</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Matlab</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Have Fun</a> &raquo;</li>
+      <li>绘制球椎体</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/003---Have Fun/007---绘制球椎体.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>绘制球椎体<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h1>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">hold</span><span class="w"> </span><span class="n">on</span><span class="w"></span>
+<span class="p">[</span><span class="n">X1</span><span class="p">,</span><span class="n">Y1</span><span class="p">,</span><span class="n">Z1</span><span class="p">]=</span><span class="nb">cylinder</span><span class="p">(</span><span class="nb">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1000</span><span class="p">),</span><span class="mi">100</span><span class="p">);</span><span class="w"></span>
+<span class="n">Z1</span><span class="p">(</span><span class="n">Z1</span><span class="o">&gt;</span><span class="nb">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)=</span><span class="nb">NaN</span><span class="p">;</span><span class="w"></span>
+<span class="nb">surf</span><span class="p">(</span><span class="n">X1</span><span class="p">,</span><span class="n">Y1</span><span class="p">,</span><span class="n">Z1</span><span class="p">);</span><span class="w"></span>
+
+<span class="p">[</span><span class="n">X2</span><span class="p">,</span><span class="n">Y2</span><span class="p">,</span><span class="n">Z2</span><span class="p">]=</span><span class="nb">sphere</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span><span class="w"></span>
+<span class="n">Z2</span><span class="p">(</span><span class="n">Z2</span><span class="o">&lt;</span><span class="nb">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)=</span><span class="nb">NaN</span><span class="p">;</span><span class="w"></span>
+<span class="nb">surf</span><span class="p">(</span><span class="n">X2</span><span class="p">,</span><span class="n">Y2</span><span class="p">,</span><span class="n">Z2</span><span class="p">);</span><span class="w"></span>
+
+<span class="n">shading</span><span class="w"> </span><span class="s">flat</span><span class="w"></span>
+<span class="nb">view</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="mi">30</span><span class="p">);</span><span class="w"></span>
+<span class="n">hold</span><span class="w"> </span><span class="s">off</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="006---%E5%8F%B3%E9%94%AE%E8%AE%BE%E7%BD%AE.html" class="btn btn-neutral float-left" title="右键设置" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="008---%E6%95%B0%E6%8D%AE%E6%B8%B8%E6%A0%87.html" class="btn btn-neutral float-right" title="数据游标" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, 王开心.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
